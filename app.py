@@ -14,19 +14,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize Dash app
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SPACELAB], suppress_callback_exceptions=True)
+app = dash.Dash(__name__, external_stylesheets=[
+                dbc.themes.SPACELAB], suppress_callback_exceptions=True)
 app.title = "ProspectPro"
 app.layout = layout
 
 # Register callbacks
 register_callbacks(app)
 
+# Expose the Flask server instance
+server = app.server
+
 # Run the app
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", port=int(os.environ.get("PORT", 8050)))
-    #app.run_server(debug=True, port=8050)
-
-
-
-
-
+    app.run_server(host="0.0.0.0", port=8050)
+    # app.run_server(debug=True, port=8050)
