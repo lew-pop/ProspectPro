@@ -113,7 +113,7 @@ def register_callbacks(app):
             chart_content = dcc.Graph(
                 id="top-war-players",
                 figure=px.bar(filtered_df.nlargest(10, 'wins_above_replacement'),
-                              x='player_id', y='wins_above_replacement',
+                              x='first_name', y='wins_above_replacement',
                               title='Top 10 Players by WAR',
                               hover_data=['first_name', 'last_name', 'position'])
             )

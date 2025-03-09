@@ -1,6 +1,5 @@
 # app.py - Main entry point for the Dash application
 import os
-from app import server
 
 import dash
 import dash_bootstrap_components as dbc
@@ -27,5 +26,5 @@ server = app.server
 
 # Run the app
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", port=8050)
-    # app.run_server(debug=True, port=8050)
+    # app.run_server(host="0.0.0.0", port=8050)
+    app.run_server(debug=True, port=8050)
