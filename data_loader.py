@@ -10,6 +10,6 @@ load_dotenv()
 # Load data securely
 # username = os.getenv("DB_USERNAME")
 # assword = os.getenv("DB_PASSWORD")
-mongo_uri = os.getenv("MONGO_URI")
+mongo_uri = os.getenv("MONGO_SRV")
 players = ProspectData(mongo_uri)
 df = pd.DataFrame.from_records(players.read_all({}))
