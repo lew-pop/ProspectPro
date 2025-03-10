@@ -8,9 +8,9 @@ sidebar = html.Div([
     html.Hr(),
     dbc.Nav([
         dbc.NavLink("Home", href="/", active="exact"),
-        dbc.NavLink("Player Statistics", href="/page-1", active="exact"),
-        dbc.NavLink("Charts & Graphs", href="/page-2", active="exact"),
-        dbc.NavLink("Compare Players", href="/page-3", active="exact"),
+        dbc.NavLink("Player Statistics", href="/player-statistics", active="exact"),
+        dbc.NavLink("Charts & Graphs", href="/charts-graphs", active="exact"),
+        dbc.NavLink("Compare Players", href="/compare-players", active="exact"),
     ], vertical=True, pills=True, className="nav"),
 ], style={
     "position": "fixed", "top": 0, "left": 0, "bottom": 0,
@@ -23,6 +23,6 @@ content = html.Div(id="page-content", style={
 })
 
 # Layout structure
-layout = html.Div([dcc.Location(id="url"), sidebar, content])
+layout = dbc.Container([dcc.Location(id="url"), sidebar, content], className="dbc")
 
 

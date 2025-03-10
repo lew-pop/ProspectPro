@@ -12,11 +12,11 @@ def register_callbacks(app):
     def render_page_content(pathname):
         if pathname == "/":
             return get_home_content()
-        elif pathname == "/page-1":
+        elif pathname == "/player-statistics":
             return get_page1_content()
-        elif pathname == "/page-2":
+        elif pathname == "/charts-graphs":
             return get_page4_content()
-        elif pathname == "/page-3":
+        elif pathname == "/compare-players":
             return get_page3_content()
         else:
             return html.Div(
@@ -40,13 +40,11 @@ def register_callbacks(app):
 
         # Create comparison table
         comparison_df = pd.DataFrame({
-            'Statistic': ['Batting Average', 'On-Base Percentage', 'Slugging Percentage', 'WAR', 'ERA'],
-            player1: [player1_data['batting_average'], player1_data['on_base_percentage'],
-                      player1_data['slugging_percentage'], player1_data['wins_above_replacement'],
-                      player1_data['earned_run_average']],
-            player2: [player2_data['batting_average'], player2_data['on_base_percentage'],
-                      player2_data['slugging_percentage'], player2_data['wins_above_replacement'],
-                      player2_data['earned_run_average']]
+            'Statistic': ['Position', 'Wins Above Replacement', 'On-Base Percentage', 'Slugging Percentage', 'Batting Average',  'Height (in)', 'Weight (lbs)'],
+            player1: [player1_data['position'], player1_data['wins_above_replacement'], player1_data['on_base_percentage'], player1_data['slugging_percentage'], player1_data['batting_average'],  
+                       player1_data['height'], player1_data['weight']],
+            player2: [player2_data['position'], player2_data['wins_above_replacement'], player2_data['on_base_percentage'], player2_data['slugging_percentage'], player2_data['batting_average'],  
+                       player2_data['height'], player2_data['weight']]
         })
 
         table = dash_table.DataTable(
@@ -57,7 +55,14 @@ def register_callbacks(app):
         )
 
         # Create bar chart comparison
-        fig = px.bar(comparison_df, x='Statistic', y=[player1, player2], barmode='group',
+        bar_df = pd.DataFrame({
+            'Statistic': ['WAR', 'Batting Average', 'On-Base Percentage', 'Slugging Percentage'],
+            player1: [player1_data['wins_above_replacement'], player1_data['batting_average'], player1_data['on_base_percentage'],
+                      player1_data['slugging_percentage']],
+            player2: [player2_data['wins_above_replacement'], player2_data['batting_average'], player2_data['on_base_percentage'],
+                      player2_data['slugging_percentage']]
+        })
+        fig = px.bar(bar_df, x='Statistic', y=[player1, player2], barmode='group',
                      title=f'Comparison between {player1} and {player2}')
 
         return table, fig
